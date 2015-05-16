@@ -1,7 +1,7 @@
-=== shoppingfeeder ===
+=== ShoppingFeeder ===
 Contributors: shoppingfeeder
 License: GNU General Public License v2
-Tags: feed, feed management, multi-channel, marketing, pricecheck, google product ads, ebay, amazon marketplace
+Tags: shoppingFeeder, WooCommerce, feed, feed management, multi-channel, marketing, PriceCheck, google product ads, ebay, amazon marketplace
 Stable tag: 1.0.0
 Requires at least: 3.0.1
 Tested up to: 4.2.2
