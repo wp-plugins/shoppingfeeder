@@ -6,8 +6,8 @@ Stable tag: 1.0.0
 Requires at least: 3.0.1
 Tested up to: 4.2.2
 
-This plugin will seamlessly allow you to integrate your WooCommerce store with ShoppingFeeder. Export your products
-to price comparisons and marketplaces.
+Seamlessly allows you to integrate your WooCommerce store with ShoppingFeeder. Export your products
+to price comparison services and marketplaces.
 
 == Description ==
 This plugin will seamlessly allow you to integrate your WooCommerce store with ShoppingFeeder.
