@@ -31,6 +31,8 @@ Some great benefits of ShoppingFeeder:
 * No setup fees
 * No contract
 
+Do you need product data feeds for Twenga, Google Merchant Center, Adroll, Criteo, Pricegrabber, Shopzilla, Idealo, PricePanda, Google Base, Buscape, Junglee and others? Let us know and we'll build them for you.
+
 == Installation ==
 
 1. Upload this plugin to the the `/wp-content/plugins/` directory
