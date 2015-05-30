@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Plugin Name: ShoppingFeeder Feed Management & Analytics
+ * Plugin Name: ShoppingFeeder
  * Plugin URI: http://www.shoppingfeeder.com
  * Description: This plugin will seamlessly allow you to integrate your WooCommerce store with ShoppingFeeder. ShoppingFeeder will then let you send your product data to price comparison engines and marketplaces.
  * Version: 1.0.0
@@ -55,6 +55,9 @@ class ShoppingFeeder {
     const WEBHOOK_ORDER_URL = 'http://www.shoppingfeeder.com/webhook/woocommerce-orders';
 
     public function init() {
+        //clear anything in the buffer
+        ob_end_clean();
+
         add_action( "parse_request", array( &$this, "shoppingfeeder_parse_request" ) );
     }
 
