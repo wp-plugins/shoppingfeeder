@@ -1,8 +1,8 @@
 === ShoppingFeeder ===
 Contributors: shoppingfeeder
 License: GNU General Public License v2
-Tags: price comparison, comparison shopping, marketplaces, ShoppingFeeder, WooCommerce, feed, feed management, multi-channel, marketing, PriceCheck, google product ads, ebay, amazon marketplace, twenga, kelkoo, google merchant center, adroll, criteo, pricegrabber, shopzilla, idealo, pricepanda, google base, buscape, junglee
-Stable tag: 1.0.0
+Tags: price comparison, comparison shopping, marketplaces, ShoppingFeeder, WooCommerce, feed, feed management, multi-channel, marketing, PriceCheck, google product ads, ebay, amazon marketplace
+Stable tag: 1.0.1
 Requires at least: 3.0.1
 Tested up to: 4.2.2
 
@@ -30,8 +30,6 @@ Some great benefits of ShoppingFeeder:
 * Multi-user accounts
 * No setup fees
 * No contract
-
-Do you need product data feeds for Twenga, Google Merchant Center, Adroll, Criteo, Pricegrabber, Shopzilla, Idealo, PricePanda, Google Base, Buscape, Junglee and others? Let us know and we'll build them for you.
 
 == Installation ==
 
