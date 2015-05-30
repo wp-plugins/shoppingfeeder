@@ -41,7 +41,14 @@ class SF_Authentication {
                     $incoming_auth_timestamp . "\n" .
                     self::RANDOM_STRING;
 
-                $signature = bin2hex( mhash( MHASH_SHA256, $string_to_sign, $local_api_secret ));
+                if (function_exists('hash_hmac'))
+                {
+                    $signature = hash_hmac('sha256', $string_to_sign, $local_api_secret);
+                }
+                elseif (function_exists('mhash'))
+                {
+                    $signature = bin2hex(mhash(MHASH_SHA256, $string_to_sign, $local_api_secret));
+                }
 
                 if ( $incoming_signature == $signature ) {
                     return true;
