@@ -47,3 +47,7 @@ Some great benefits of ShoppingFeeder:
 
 Create an account at: http://www.shoppingfeeder.com/register, log in to your new ShoppingFeeder account, and a wizard
 will guide you through setting up your ShoppingFeeder account and connecting your WooCommerce store.
+
+= Is there support if I can't get this working? =
+
+Of course there is. Just contact us here: http://shoppingfeeder.com/contact
