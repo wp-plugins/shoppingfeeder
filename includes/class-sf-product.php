@@ -180,6 +180,9 @@ class SF_Product extends SF_Resource
         {
             $attribute_label = $attribute['name'];
             $value = current( $attribute['options'] );
+
+            $useful_attributes[$attribute_label] = $value;
+
             if ( preg_match('/^manufacturer$/i', $attribute_label ) ) {
                 $manufacturer = $value;
             }
@@ -194,22 +197,6 @@ class SF_Product extends SF_Resource
 
             if ( preg_match( '/^(gtin|ean|upc)$/i', $attribute_label ) ) {
                 $gtin = $value;
-            }
-
-            if ( preg_match( '/color|colour/i', $attribute_label ) ) {
-                $useful_attributes['colour'] = $value;
-            }
-            if ( preg_match( '/size/i', $attribute_label ) ) {
-                $useful_attributes['size'] = $value;
-            }
-            if ( preg_match( '/gender|sex/i', $attribute_label ) ) {
-                $useful_attributes['gender'] = $value;
-            }
-            if ( preg_match( '/material/i', $attribute_label ) ) {
-                $useful_attributes['material'] = $value;
-            }
-            if ( preg_match( '/pattern/i', $attribute_label ) ) {
-                $useful_attributes['pattern'] = $value;
             }
         }
 

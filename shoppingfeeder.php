@@ -32,6 +32,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 include dirname( __FILE__ ) . '/includes/class-sf-authentication.php';
 include dirname( __FILE__ ) . '/includes/class-sf-order.php';
 include dirname( __FILE__ ) . '/includes/class-sf-product.php';
+include dirname( __FILE__ ) . '/includes/class-sf-attribute.php';
 
 
 if ( !function_exists( 'getallheaders' ) ) {
@@ -50,7 +51,7 @@ class ShoppingFeeder {
     /**
      * @var string
      */
-    public $version = '1.0.1';
+    public $version = '1.0.2';
     const OPTION_GROUP = 'shoppingfeeder-option-group';
     const WEBHOOK_ORDER_URL = 'http://www.shoppingfeeder.com/webhook/woocommerce-orders';
 
@@ -82,6 +83,9 @@ class ShoppingFeeder {
             }
             elseif ( $type == 'version' ) {
                 $this->version();
+            }
+            elseif ( $type == 'attributes' ) {
+                $this->attributes();
             }
         }
 
@@ -430,6 +434,43 @@ class ShoppingFeeder {
                 'version' => $this->version
             )
         );
+
+        header( 'Content-type: application/json; charset=UTF-8' );
+        echo json_encode( $response_data );
+        exit();
+    }
+
+    public function attributes() {
+        $server_info = $this->get_server_info();
+
+        $auth_result = SF_Authentication::auth(
+            $server_info['headers'],
+            $server_info['protocol'],
+            $server_info['method']
+        );
+
+        if ( $auth_result === true ) {
+            set_time_limit( 0 );
+
+            $attribute_model = new SF_Attribute();
+
+            $attributes = $attribute_model->get_attributes();
+
+            $response_data = array(
+                'status' => 'success',
+                'data' => array(
+                    'attributes' => $attributes
+                )
+            );
+        } else {
+            $response_data = array(
+                'status' => 'fail',
+                'data' => array (
+                    'message' => $auth_result
+                )
+            );
+
+        }
 
         header( 'Content-type: application/json; charset=UTF-8' );
         echo json_encode( $response_data );
