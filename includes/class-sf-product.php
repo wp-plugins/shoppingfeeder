@@ -63,7 +63,7 @@ class SF_Product extends SF_Resource
         return array( $product_category, $id, $term, $this );
     }
 
-    public function get_products( $page = null, $num_per_page = 1000 )
+    public function get_products( $page = null, $num_per_page = 1000, $allow_variants = true )
     {
         // set base query arguments
         $query_args = array(
@@ -102,29 +102,31 @@ class SF_Product extends SF_Resource
 
             list( $product_data, $variations) = $this->get_product( $product_id, null );
             $products[] = $product_data;
-            if ( !is_null( $variations ) ) {
-                foreach ( $variations as $variation ) {
-                    $base_product = $product_data;
+            if ( $allow_variants ) {
+                if ( !is_null( $variations ) ) {
+                    foreach ( $variations as $variation ) {
+                        $base_product = $product_data;
 
-                    //remove the extra images as they don't apply to the variant
-                    unset( $base_product['extra_images'] );
+                        //remove the extra images as they don't apply to the variant
+                        unset( $base_product['extra_images'] );
 
-                    //bring in the variant data
-                    $variant = array_merge( $base_product, $variation );
+                        //bring in the variant data
+                        $variant = array_merge( $base_product, $variation );
 
-                    //create the title from attributes
-                    if ( !empty( $variant['attributes'] ) ) {
-                        foreach ( $variant['attributes'] as $attribute ) {
-                            if ( !empty( $attribute['option'] ) ) {
-                                $variant['title'] .= ' '.$attribute['option'];
-                            }
-                            if ( isset( $variant['image'][0]['image_url'] ) ) {
-                                $variant['image_url'] = $variant['image'][0]['image_url'];
-                                unset( $variant['image'] );
+                        //create the title from attributes
+                        if ( !empty( $variant['attributes'] ) ) {
+                            foreach ( $variant['attributes'] as $attribute ) {
+                                if ( !empty( $attribute['option'] ) ) {
+                                    $variant['title'] .= ' '.$attribute['option'];
+                                }
+                                if ( isset( $variant['image'][0]['image_url'] ) ) {
+                                    $variant['image_url'] = $variant['image'][0]['image_url'];
+                                    unset( $variant['image'] );
+                                }
                             }
                         }
+                        $products[] = $variant;
                     }
-                    $products[] = $variant;
                 }
             }
         }
@@ -141,7 +143,7 @@ class SF_Product extends SF_Resource
      * @param string $fields
      * @return array
      */
-    public function get_product( $id, $fields = null ) {
+    public function get_product( $id, $fields = null, $allow_variants = true ) {
 
         $product = wc_get_product( $id );
 
@@ -149,16 +151,19 @@ class SF_Product extends SF_Resource
         $product_data = $this->get_product_data( $product );
 
         $variations = null;
-        // add variations to variable products
-        if ( $product->is_type( 'variable' ) && $product->has_child() ) {
 
-            $variations = $this->get_variation_data( $product );
-        }
+        if ( $allow_variants ) {
+            // add variations to variable products
+            if ( $product->is_type( 'variable' ) && $product->has_child() ) {
 
-        // add the parent product data to an individual variation
-        if ( $product->is_type( 'variation' ) ) {
+                $variations = $this->get_variation_data( $product );
+            }
 
-            //$product_data['parent'] = $this->get_product_data( $product->parent );
+            // add the parent product data to an individual variation
+            if ( $product->is_type( 'variation' ) ) {
+
+                //$product_data['parent'] = $this->get_product_data( $product->parent );
+            }
         }
 
         return array( $product_data, $variations );

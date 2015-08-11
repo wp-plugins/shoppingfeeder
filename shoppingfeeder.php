@@ -51,7 +51,7 @@ class ShoppingFeeder {
     /**
      * @var string
      */
-    public $version = '1.0.2';
+    public $version = '1.0.3';
     const OPTION_GROUP = 'shoppingfeeder-option-group';
     const WEBHOOK_ORDER_URL = 'http://www.shoppingfeeder.com/webhook/woocommerce-orders';
 
@@ -67,13 +67,14 @@ class ShoppingFeeder {
         if ( isset( $wp_query->query_vars['shoppingfeeder'] ) ) {
             $page = ( isset( $wp_query->query_vars['page'] )) ? $wp_query->query_vars['page'] : null;
             $num_per_page = ( isset( $wp_query->query_vars['num_per_page'] ) ) ? $wp_query->query_vars['num_per_page'] : 1000;
-            $orderStatus = ( isset( $wp_query->query_vars['order_status'] ) ) ? $wp_query->query_vars['order_status'] : 'completed';
+            $order_status = ( isset( $wp_query->query_vars['order_status'] ) ) ? $wp_query->query_vars['order_status'] : 'completed';
+            $allow_variants = ( isset( $wp_query->query_vars['allow_variants'] ) ) ? ((intval($wp_query->query_vars['allow_variants']) == 1) ? true : false) : true;
 
             if ( $type == 'products' ) {
-                $this->get_products( $page, $num_per_page, $wp_query->query_vars['product_id'] );
+                $this->get_products( $page, $num_per_page, $wp_query->query_vars['product_id'], $allow_variants );
             }
             elseif ( $type == 'orders' ) {
-                $this->get_orders( $page, $num_per_page, $wp_query->query_vars['order_id'], $orderStatus );
+                $this->get_orders( $page, $num_per_page, $wp_query->query_vars['order_id'], $order_status );
             }
             elseif ( $type == 'debug' ) {
                 $this->debug();
@@ -154,7 +155,7 @@ class ShoppingFeeder {
         return $date->format( 'Y-m-d\TH:i:s\Z' );
     }
 
-    public function get_products( $page, $num_per_page, $product_id = null )
+    public function get_products( $page, $num_per_page, $product_id = null, $allow_variants = true )
     {
         $server_info = $this->get_server_info();
 
@@ -170,9 +171,9 @@ class ShoppingFeeder {
             $product_model = new SF_Product();
 
             if ( is_null( $product_id ) ) {
-                $products = $product_model->get_products( $page, $num_per_page );
+                $products = $product_model->get_products( $page, $num_per_page, $allow_variants );
             } else {
-                $products = array( $product_model->get_product( $product_id ) );
+                $products = array( $product_model->get_product( $product_id, null, $allow_variants ) );
             }
 
             $response_data = array(
