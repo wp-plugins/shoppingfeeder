@@ -4,7 +4,7 @@
  * Plugin Name: ShoppingFeeder
  * Plugin URI: http://www.shoppingfeeder.com
  * Description: This plugin will seamlessly allow you to integrate your WooCommerce store with ShoppingFeeder. ShoppingFeeder will then let you send your product data to price comparison engines and marketplaces.
- * Version: 1.0.2
+ * Version: 1.0.3
  * Author: ShoppingFeeder
  * Author URI: http://www.shoppingfeeder.com
  * License: GPL2
