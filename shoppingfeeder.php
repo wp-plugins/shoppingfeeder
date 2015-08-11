@@ -500,6 +500,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
         $vars[] = 'product_id';
         $vars[] = 'order_id';
         $vars[] = 'order_status';
+        $vars[] = 'allow_variants';
         $vars[] = 'shoppingfeeder'; //to make sure we can call our relevant functions
         return $vars;
     }
