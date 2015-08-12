@@ -102,6 +102,7 @@ class SF_Product extends SF_Resource
 
             list( $product_data, $variations) = $this->get_product( $product_id, null );
             $products[] = $product_data;
+
             if ( $allow_variants ) {
                 if ( !is_null( $variations ) ) {
                     foreach ( $variations as $variation ) {
@@ -149,6 +150,11 @@ class SF_Product extends SF_Resource
 
         // add data that applies to every product type
         $product_data = $this->get_product_data( $product );
+        if ($product->is_type( 'variable' ))
+        {
+            $product_data['sale_price'] = $product->min_variation_price;
+            $product_data['price'] = $product->get_variation_regular_price( 'min', false );
+        }
 
         $variations = null;
 

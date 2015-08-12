@@ -2,7 +2,7 @@
 Contributors: shoppingfeeder
 License: GNU General Public License v2
 Tags: price comparison, comparison shopping, marketplaces, ShoppingFeeder, WooCommerce, feed, feed management, multi-channel, marketing, PriceCheck, google product ads, ebay, amazon marketplace
-Stable tag: 1.0.3
+Stable tag: 1.0.4
 Requires at least: 3.0.1
 Tested up to: 4.2.2
 
